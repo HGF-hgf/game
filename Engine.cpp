@@ -7,6 +7,7 @@
 #include"Input.h"
 #include"Timer.h"
 #include"MapParser.h"
+#include"Camera.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ bool Engine::Init() {
 	}
 	
 	SDL_WindowFlags  window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-	m_Window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 720, window_flags);
+	m_Window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, window_flags);
 	if (m_Window == nullptr) {
 		SDL_Log("FAILED TO CREATE WINDOW\n", SDL_GetError());
 		return false;
@@ -44,27 +45,35 @@ bool Engine::Init() {
 	m_LevelMap = MapParser::GetInstance()->GetMap("Level1");
 
 	Texture::Getinstance()->LoadTexture("player", "texture/s.png");
-	player = new Player (new Properties("player", 100, 200, 128, 128));
-
 	Texture::Getinstance()->LoadTexture("player_run", "texture/r.png");
+	Texture::Getinstance()->LoadTexture("player_jump", "texture/jump.png");
 
+	player = new Player(new Properties("player", 100, 200, 128, 128));
+	
+
+	Camera::GetInstance()->SetTarget(player->GetOrigin());
 	return m_isRunning = true;
 }
 
-void Engine::Update() {
-	float dt = Timer::Getinstance()->GetDeltaTime();
-	m_LevelMap->Update();
-	player->Update(dt);
-}
 
 void Engine::Render() {
 	SDL_SetRenderDrawColor(m_Renderer, 164, 218, 254, 255);
 	SDL_RenderClear(m_Renderer);
-	
+
+	//	Texture::Getinstance()->Draw("12", 0, 0, 720, 767);
 	m_LevelMap->Render();
 	player->Draw();
 	SDL_RenderPresent(m_Renderer);
 }
+
+void Engine::Update() {
+	float dt = Timer::Getinstance()->GetDeltaTime();
+	player->Update(dt);
+	m_LevelMap->Update();
+	Camera::GetInstance()->Update(dt);
+}
+
+
 
 void Engine::Events() {
 	Input::GetInstance()->HandIn();

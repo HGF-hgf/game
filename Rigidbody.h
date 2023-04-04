@@ -8,6 +8,8 @@ using namespace std;
 
 #define FORWARD 1
 #define BACKWARD -1
+
+
 #define UPWARD -1
 #define DOWNWARD 1
 
@@ -42,8 +44,8 @@ public:
 	void Update(float dt) {
 		m_Accelaration.X = (m_Force.X + m_Friction.X) / m_Mass;
 		m_Accelaration.Y = m_Gravity + m_Force.Y / m_Mass;
-		m_Velocity = m_Accelaration * dt;
-		m_Position = m_Velocity * dt;
+		m_Velocity = m_Accelaration ;
+		m_Position = m_Velocity ;
 	}
 
 private:

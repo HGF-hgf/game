@@ -1,12 +1,14 @@
 #pragma once
-
-
+#ifndef ENGINE_H
+#define ENGINE_H
+ 
 #include<SDL.h>
 #include<SDL_image.h>
 #include"Map.h"
 
-#define SCREEN_WIDTH = 960
-#define SCREEN_HEIGHT = 720
+#define SCREEN_WIDTH  960
+#define SCREEN_HEIGHT 640
+
 class Engine{
 public:
 	static Engine* Getinstance() {
@@ -21,6 +23,7 @@ public:
 	void Render();
 	void Events();
 	
+	inline Map* GetMap() { return m_LevelMap; }
 	inline bool isRunning() { return m_isRunning; };
 	inline SDL_Renderer* GetRenderer() { return m_Renderer; };
 private:
@@ -33,3 +36,4 @@ private:
 	static Engine* s_Instance;
 };
 
+#endif //

@@ -1,5 +1,6 @@
 #include "Texture.h"
 #include"Engine.h"
+#include"Camera.h"
 #include<string>
 #include<map>
 #include<SDL.h>
@@ -28,7 +29,8 @@ bool Texture::LoadTexture(string id, string filename) {
 
 void Texture::Draw(string id, int x, int y, int width, int height, SDL_RendererFlip flip) {
 	SDL_Rect srcRect = { 0, 0, width, height };
-	SDL_Rect dstRect = { x, y, width, height };
+	Vector2D cam = Camera::GetInstance()->GetPosition() * 0.5;
+	SDL_Rect dstRect = { x - cam.X,y - cam.Y,width,height };
 	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 
 }
@@ -36,15 +38,18 @@ void Texture::Draw(string id, int x, int y, int width, int height, SDL_RendererF
 void Texture::DrawTile(string p_id, int p_tilesize, int p_x, int p_y, int p_row, int p_frame, SDL_RendererFlip p_flip)
 {
 	SDL_Rect srcRect = { p_tilesize * p_frame, p_tilesize* p_row, p_tilesize, p_tilesize };
-	SDL_Rect dstRect = { p_x, p_y , p_tilesize, p_tilesize };
-	//Vector2D camera = Camera::GetInstance()->GetPosition();
+	Vector2D cam = Camera::GetInstance()->GetPosition();
+	SDL_Rect dstRect = { p_x - cam.X, p_y - cam.Y , p_tilesize, p_tilesize };
+	
 	
 	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[p_id], &srcRect, &dstRect, 0, nullptr, p_flip);
 }
 
 void Texture::DrawFrame(string id, int x, int y, int width, int height, int row, int frame, SDL_RendererFlip flip) {
 	SDL_Rect srcRect = { width * frame, height * (row - 1), width,height };
-	SDL_Rect dstRect = { x,y,width,height };
+	
+	Vector2D cam = Camera::GetInstance()->GetPosition();
+	SDL_Rect dstRect = { x - cam.X,y - cam.Y,width,height };
 	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 }
 void Texture::Drop(string id) {

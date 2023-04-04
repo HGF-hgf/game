@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -38,6 +39,8 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
@@ -46,6 +49,7 @@
     <ClInclude Include="MapParser.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
