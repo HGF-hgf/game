@@ -2,6 +2,8 @@
 #include<SDL.h>
 using namespace std;
 
+enum Axis { HORIZONTAL, VERTICAL };
+
 class Input {
 public:
 	static Input* GetInstance() {
@@ -10,6 +12,8 @@ public:
 
 	void HandIn();
 	bool GetKeyDown(SDL_Scancode key);
+
+	int GetAxisKey(Axis axis);
 
 private:
 	Input();

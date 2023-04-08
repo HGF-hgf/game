@@ -5,7 +5,7 @@ using namespace std;
 MapParser* MapParser::s_Instance = nullptr;
 
 bool MapParser::Load() {
-	if(!Parse("Level1", "texture/map/map1.tmx"))
+	if(!Parse("Level1", "texture/map/map2.tmx"))
 		return false;
 	return true;
 }

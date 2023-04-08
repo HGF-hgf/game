@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<textures>
+	<texture id="player_run" source="texture/run.png"/>
+	<texture id="player_idle" source="texture/idle.png"/>
+	<texture id="player_jump" source="texture/jump-Sheet3.png"/>
+	<texture id="player_fall" source="texture/fall-Sheet.png"/>
+	
+	<texture id="bg" source="texture/bg.jpg"/>
+
+</textures>

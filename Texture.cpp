@@ -5,6 +5,7 @@
 #include<map>
 #include<SDL.h>
 #include<SDL_image.h>
+#include"tinyxml.h"
 using namespace std;
 
 Texture* Texture::s_Instance = nullptr;
@@ -23,14 +24,13 @@ bool Texture::LoadTexture(string id, string filename) {
 	}
 
 	m_TextureMap[id] = texture;
-
 	return true;
 }
 
-void Texture::Draw(string id, int x, int y, int width, int height, SDL_RendererFlip flip) {
+void Texture::Draw(string id, int x, int y, int width, int height,float Xscale, float Yscale ,float scrollRatio, SDL_RendererFlip flip) {
 	SDL_Rect srcRect = { 0, 0, width, height };
-	Vector2D cam = Camera::GetInstance()->GetPosition() * 0.5;
-	SDL_Rect dstRect = { x - cam.X,y - cam.Y,width,height };
+	Vector2D cam = Camera::GetInstance()->GetPosition() * scrollRatio;
+	SDL_Rect dstRect = { x - cam.X,y - cam.Y,width * Xscale,height * Yscale };
 	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 
 }
@@ -40,18 +40,37 @@ void Texture::DrawTile(string p_id, int p_tilesize, int p_x, int p_y, int p_row,
 	SDL_Rect srcRect = { p_tilesize * p_frame, p_tilesize* p_row, p_tilesize, p_tilesize };
 	Vector2D cam = Camera::GetInstance()->GetPosition();
 	SDL_Rect dstRect = { p_x - cam.X, p_y - cam.Y , p_tilesize, p_tilesize };
-	
-	
 	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[p_id], &srcRect, &dstRect, 0, nullptr, p_flip);
 }
 
 void Texture::DrawFrame(string id, int x, int y, int width, int height, int row, int frame, SDL_RendererFlip flip) {
 	SDL_Rect srcRect = { width * frame, height * (row - 1), width,height };
-	
 	Vector2D cam = Camera::GetInstance()->GetPosition();
 	SDL_Rect dstRect = { x - cam.X,y - cam.Y,width,height };
-	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
+	SDL_RenderCopyEx(Engine::Getinstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, 0, flip);
 }
+
+bool Texture::ParseTexture(string source) {
+	 
+	TiXmlDocument xml;
+	xml.LoadFile(source);
+	if (xml.Error()) {
+		cout << "FAILED TO LOAD" << endl;
+		return false;
+	}
+
+	TiXmlElement* root = xml.RootElement();
+	for (TiXmlElement* e = root->FirstChildElement();e != nullptr;e = e->NextSiblingElement()) {
+		if (e->Value() == string("texture")) {
+			string id = e->Attribute("id");
+			string src = e->Attribute("source");
+			LoadTexture(id, src);
+		}
+	}
+	cout << "LOADED" << endl;
+	return true;
+}
+
 void Texture::Drop(string id) {
 	SDL_DestroyTexture(m_TextureMap[id]);
 	m_TextureMap.erase(id);

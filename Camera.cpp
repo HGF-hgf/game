@@ -5,7 +5,7 @@ using namespace std;
 Camera* Camera::s_Instance = nullptr;
 void Camera::Update(float dt) {
 
-	if (m_Target != nullptr) {
+	if (m_Target != nullptr ) {
 		m_ViewBox.x = m_Target->X - SCREEN_WIDTH / 2;
 		m_ViewBox.y = m_Target->Y - SCREEN_HEIGHT / 2;
 

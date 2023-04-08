@@ -1,9 +1,8 @@
 #pragma once
-#include"Point.h"
 #include"Vector2D.h"
-#include<SDL.h>
 #include"Engine.h"
-
+#include"Point.h"
+#include"INCLUDE.h"
 using namespace std;
 
 class Camera {

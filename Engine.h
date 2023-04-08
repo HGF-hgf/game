@@ -1,13 +1,15 @@
 #pragma once
-#ifndef ENGINE_H
-#define ENGINE_H
- 
-#include<SDL.h>
-#include<SDL_image.h>
-#include"Map.h"
 
-#define SCREEN_WIDTH  960
-#define SCREEN_HEIGHT 640
+
+#include"INCLUDE.h"
+#include"GameObject.h"
+#include"Map.h"
+//#include"GameState.h"
+
+using namespace std;
+
+#define SCREEN_WIDTH 1280 //1536
+#define SCREEN_HEIGHT 720 //816
 
 class Engine{
 public:
@@ -22,6 +24,10 @@ public:
 	void Update();
 	void Render();
 	void Events();
+
+	//void PopState();// pause the game but not quit
+	//void PushState(GameState* current);//when you don't want to destroy the current state but still want to add smt in and drove it on the screen
+	//void ChangeState(GameState* target);//changing the state
 	
 	inline Map* GetMap() { return m_LevelMap; }
 	inline bool isRunning() { return m_isRunning; };
@@ -34,6 +40,8 @@ private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
 	static Engine* s_Instance;
+	//vector<GameState*> m_State;
+	vector<GameObject*>m_GameObjects;
+	
 };
 
-#endif //

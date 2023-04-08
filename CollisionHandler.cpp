@@ -1,5 +1,6 @@
 #include "CollisionHandler.h"
 #include"Engine.h"
+#include <iostream>
 
 using namespace std;
 
@@ -18,8 +19,8 @@ bool CollisionHandler::checkCollision(SDL_Rect a, SDL_Rect b) {
 
 bool CollisionHandler::MapCollision(SDL_Rect a) {
 	int tileSize = 32;
-	int RowCount = 20;
-	int ColCount = 60;
+	int RowCount = 1000;
+	int ColCount = 1920;
 
 	int left_tile = a.x / tileSize;
 	int right_tile = (a.x + a.w) / tileSize;
@@ -36,6 +37,7 @@ bool CollisionHandler::MapCollision(SDL_Rect a) {
 	for (int i = left_tile; i <= right_tile; ++i) {
 		for (int j = top_tile; j <= bottom_tile; ++j) {
 			if (m_CollisionTilemap[j][i] > 0) {
+				std::cout << j << ' ' << i << '\n';
 				return true;
 			}
 		}
