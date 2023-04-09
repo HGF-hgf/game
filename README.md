@@ -30,4 +30,5 @@
 - Including the addition of more obstacles
 - Scoring system to display and save the player's scores
 - Menu
+
 *Estimated time of completion is within 1-2 weeks
