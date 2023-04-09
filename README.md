@@ -12,7 +12,7 @@
 * Esc to pause game
 
 ## 🖼️ Preview
-
+/texture/idle.png
 
 ## 📦 Libararies 
 - SDL
