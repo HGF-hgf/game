@@ -19,3 +19,11 @@
     - SDL
     - TinyXml (A small and convenient library supporting Xml operations for C++).
 
+# Current state of the game 
+    - Not yet complete
+    
+# Requires further updates in the near future
+    - Including the addition of more obstacles
+    - Scoring system to display and save the player's scores
+    - Menu. 
+    *Estimated time of completion is within 1-2 weeks.
