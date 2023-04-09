@@ -8,7 +8,7 @@
 #define JUMP_TIME 2.0f
 #define JUMP_FORCE 7.0f
 
-#define RUN_FORCE 4.0f
+#define RUN_FORCE 3.0f
 #define ATTACK_TIME 20.0f
 
 using namespace std;

@@ -136,7 +136,7 @@ void Player::AnimationState() {
 
 //run
 	if(m_IsRunning && !m_IsJumping)
-	m_Animation->SetProps("player_run", 1, 4, 100);
+	m_Animation->SetProps("player_run", 1, 4, 150);
 
 //jump
 	if(m_IsJumping)

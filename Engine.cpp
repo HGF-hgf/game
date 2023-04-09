@@ -2,6 +2,7 @@
 #include"Engine.h"
 #include"GameObject.h"
 //#include"Factory.h"
+
 #include"Texture.h"
 #include"Input.h"
 #include"Player.h"
@@ -53,12 +54,14 @@ bool Engine::Init() {
 	Texture::Getinstance()->LoadTexture("player_fall", "texture/fall.png");
 	
 	*/
-	Texture::Getinstance()->LoadTexture("bg", "texture/bg2.jpg");
+	//Texture::Getinstance()->LoadTexture("bg", "texture/bg2.jpg");
 	/*Properties* props = new Properties("player_idle", 100, 100, 128, 128);
 	GameObject* player = Factory::Getinstance()->CreateObject("player", props);*/
 	Player* player = new Player(new Properties("player", 100, 100, 128, 128));
 	
+	
 	//Enemy* enemy = new Enemy(new Properties("enemy_idle", 820, 240, 128, 128));
+
 	
 	m_GameObjects.push_back(player);
 	//m_GameObjects.push_back(enemy);
@@ -73,6 +76,7 @@ void Engine::Render() {
 	SDL_RenderClear(m_Renderer);
 
 	Texture::Getinstance()->Draw("bg", 0, 0, 1920, 1080, 1, 0.9, 0.3);
+
 	m_LevelMap->Render();
 
 	for (unsigned int i = 0;i != m_GameObjects.size();i++) {

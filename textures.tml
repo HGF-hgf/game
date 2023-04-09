@@ -4,7 +4,8 @@
 	<texture id="player_idle" source="texture/idle.png"/>
 	<texture id="player_jump" source="texture/jump-Sheet3.png"/>
 	<texture id="player_fall" source="texture/fall-Sheet.png"/>
-	
-	<texture id="bg" source="texture/bg.jpg"/>
+
+	<texture id="explosion" source="texture/Explosion.png"/>
+	<texture id="bg" source="texture/bg2.jpg"/>
 
 </textures>
