@@ -3,11 +3,11 @@
 #include"INCLUDE.h"
 #include"Input.h"
 #include"Engine.h"
-#include"Factory.h"
+//#include"Factory.h"
 #include"CollisionHandler.h"
 #include"Camera.h"
 
-static Registrar<Player> registrar("player");
+//static Registrar<Player> registrar("player");
 
 Player::Player(Properties* props) :Character(props) {
 	

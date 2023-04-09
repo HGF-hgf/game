@@ -9,7 +9,7 @@
 using namespace std;
 
 #define SCREEN_WIDTH 1280 //1536
-#define SCREEN_HEIGHT 720 //816
+#define SCREEN_HEIGHT 800//816
 
 class Engine{
 public:

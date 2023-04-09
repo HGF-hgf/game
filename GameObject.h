@@ -41,7 +41,7 @@ public:
 
 	inline Point* GetOrigin() { return m_Origin; }
 
-	virtual ~GameObject() {}
+	//virtual ~GameObject() {}
 	virtual void Draw() = 0;
 	virtual void Update(float dt) = 0;
 	virtual void Clean() = 0;

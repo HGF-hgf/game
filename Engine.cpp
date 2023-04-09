@@ -1,7 +1,7 @@
 #include"INCLUDE.h"
 #include"Engine.h"
 #include"GameObject.h"
-#include"Factory.h"
+//#include"Factory.h"
 #include"Texture.h"
 #include"Input.h"
 #include"Player.h"
@@ -13,7 +13,7 @@
 using namespace std;
 
 Engine* Engine::s_Instance = nullptr;
-Player* player = nullptr;
+//Player* player = nullptr;
 bool Engine::Init() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_JPG) != 0) {
 		SDL_Log("FAILED TO INITIALIZE SDL\n", SDL_GetError());
@@ -54,8 +54,9 @@ bool Engine::Init() {
 	
 	*/
 	Texture::Getinstance()->LoadTexture("bg", "texture/bg2.jpg");
-	Properties* props = new Properties("player_idle", 100, 100, 128, 128);
-	GameObject* player = Factory::Getinstance()->CreateObject("player", props);
+	/*Properties* props = new Properties("player_idle", 100, 100, 128, 128);
+	GameObject* player = Factory::Getinstance()->CreateObject("player", props);*/
+	Player* player = new Player(new Properties("player", 100, 100, 128, 128));
 	
 	//Enemy* enemy = new Enemy(new Properties("enemy_idle", 820, 240, 128, 128));
 	
