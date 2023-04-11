@@ -1,8 +1,13 @@
 #include"Camera.h"
-
+#include"Engine.h"
 using namespace std;
 
 Camera* Camera::s_Instance = nullptr;
+
+Camera::Camera() {
+	m_ViewBox = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT }; 
+}
+
 void Camera::Update(float dt) {
 
 	if (m_Target != nullptr ) {

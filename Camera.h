@@ -1,6 +1,6 @@
 #pragma once
 #include"Vector2D.h"
-#include"Engine.h"
+//#include"Engine.h"
 #include"Point.h"
 #include"INCLUDE.h"
 using namespace std;
@@ -17,7 +17,7 @@ public:
 
 private:
 
-	Camera() {m_ViewBox = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT}; }
+	Camera();
 
 	SDL_Rect m_ViewBox;
 	Point* m_Target;

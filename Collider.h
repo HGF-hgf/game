@@ -4,6 +4,7 @@
 #include"CollisionHandler.h"
 #include"INCLUDE.h"
 
+
 using namespace std;
 
 class Collider {
@@ -19,11 +20,7 @@ public:
 		return CollisionHandler::GetInstance()->MapCollision(m_Box);
 	}
 
-	void Draw() {
-	Vector2D cam = Camera::GetInstance()->GetPosition();
-	SDL_Rect box = { (int)(m_Box.x - cam.X), (int)(m_Box.y - cam.Y), m_Box.w,  m_Box.h };
-	SDL_RenderDrawRect(Engine::Getinstance()->GetRenderer(), &box);
-	}
+	void Draw();
 
 private:
 	SDL_Rect m_Box;

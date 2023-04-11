@@ -55,11 +55,11 @@ bool Engine::Init() {
 	//Texture::Getinstance()->LoadTexture("bg", "texture/bg2.jpg");
 	/*Properties* props = new Properties("player_idle", 100, 100, 128, 128);
 	GameObject* player = Factory::Getinstance()->CreateObject("player", props);*/
-	Player* player = new Player(new Properties("player", 100 , 300, 128, 128), 1, 6, 150, -48, -44, -30, -52);
+	player = new Player(new Properties("player", 100 , 300, 128, 128), 1, 6, 150, -48, -44, -30, -52);
 	m_GameObjects.push_back(player);
 	
-	for (int i = 0; i < 6;++i) {
-		Enemy* enemy = new Enemy(new Properties("enemy", 100 * i * (rand() % (5 + 2 - 1) + 2), 240, 192, 192), 1, 4, 150, -68, -34, -50, -93);
+	for (int i = 0; i < 1;++i) {
+		Enemy* enemy = new Enemy(new Properties("enemy", 800 /* i * (rand() % (5 + 2 - 1) + 2)*/, 240, 192, 192), 1, 4, 150, -68, -34, -50, -93);
 		m_GameObjects.push_back(enemy);
 	}
 	

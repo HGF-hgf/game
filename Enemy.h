@@ -8,6 +8,8 @@
 
 using namespace std;
 
+#define VEL 1.5f
+
 class Enemy : public Character {
 public:
 	Enemy(Properties* props, float Row, float FrameCount, float AnimationSpeed, float x, float y, float w, float h);
