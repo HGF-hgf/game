@@ -1,59 +1,37 @@
-//#include"Enemy.h"
-//#include"Camera.h"
-//#include"Input.h"
+#include"Enemy.h"
+#include"Texture.h"
+#include"INCLUDE.h"
+#include"Input.h"
+#include"Engine.h"
 //#include"Factory.h"
-//#include"CollisionHandler.h"
-//#include"INCLUDE.h"
-//
-//static Registrar<Enemy> registrar("enemy");
-//
-//Enemy::Enemy(Properties* props) : Character(props) {
-//	m_Rigidbody = new Rigidbody;
-//	m_Rigidbody->SetGravity(3.0f);
-//
-//	m_Collider = new Collider();
-//
-//	m_Animation = new SeqAnimation;
-////	m_Animation->Parse("texture/animation.aml");
-//	//m_Animation->SetCurrentSeq("");
-//
-//}
-//
-//void Enemy::Draw() {
-//	m_Animation->DrawFrame(m_Transform->X, m_Transform->Y, 1, 1, m_Flip);
-//}
-//
-//void Enemy::Update(float dt) {
-//
-////	Xaxis
-//	m_Rigidbody->Update(dt);
-//	m_LastSafePosiotion->X = m_Transform->X;
-//	m_Transform->X += m_Rigidbody->Position().X;
-//	m_Collider->Set(m_Transform->X, m_Transform->Y, 64, 64);
-//
-//	if (CollisionHandler::GetInstance()->MapCollision(m_Collider->Get())) {
-//		m_Transform->X = m_LastSafePosiotion->X;
-//	}
-//
-//	//Yaxis
-//	m_Rigidbody->Update(dt);
-//	m_LastSafePosiotion->Y = m_Transform->Y;
-//	m_Transform->Y += m_Rigidbody->Position().Y;
-//	m_Collider->Set(m_Transform->X, m_Transform->Y, 64, 64);
-//
-//	if (CollisionHandler::GetInstance()->MapCollision(m_Collider->Get())) {
-//		m_Transform->Y = m_LastSafePosiotion->Y;
-//	}
-//
-//	m_Animation->Update(dt);
-//
-//	if (m_Animation->IsEnded()) {
-//		m_Animation->SetRepeat(true);
-//	//	m_Animation->SetCurrentSeq("enemy_idle");
-//	}
-//
-//}
-//
-//void Enemy::Clean() {
-//
-//}
+#include"CollisionHandler.h"
+#include"Camera.h"
+
+Enemy::Enemy(Properties* props, float Row, float FrameCount, float AnimationSpeed, float x, float y, float w, float h) :Character(props, Row, FrameCount, AnimationSpeed, x, y, w, h) {
+
+	/*m_IsRunning = false;
+	m_IsJumping = false;
+	m_IsFalling = false;
+	m_IsGrounded = false;
+	m_IsAttacking = false;
+	m_IsDead = false;*/
+
+
+
+}
+
+
+void Enemy::Update(float dt) {
+
+	Character::Update(dt);
+	AnimationState();
+	m_Animation->Update(dt);
+	
+}
+
+void Enemy::AnimationState() {
+	//idle
+	m_Animation->SetProps("Enemy_idle", 1, 4, 170);
+
+	
+}

@@ -1,8 +1,6 @@
 #include"INCLUDE.h"
 #include"Engine.h"
 #include"GameObject.h"
-//#include"Factory.h"
-
 #include"Texture.h"
 #include"Input.h"
 #include"Player.h"
@@ -57,14 +55,17 @@ bool Engine::Init() {
 	//Texture::Getinstance()->LoadTexture("bg", "texture/bg2.jpg");
 	/*Properties* props = new Properties("player_idle", 100, 100, 128, 128);
 	GameObject* player = Factory::Getinstance()->CreateObject("player", props);*/
-	Player* player = new Player(new Properties("player", 100, 100, 128, 128));
-	
-	
-	//Enemy* enemy = new Enemy(new Properties("enemy_idle", 820, 240, 128, 128));
-
-	
+	Player* player = new Player(new Properties("player", 100, 300, 128, 128), 1, 6, 150, -48, -44, -30, -52);
 	m_GameObjects.push_back(player);
-	//m_GameObjects.push_back(enemy);
+	
+	for (int i = 0; i < 1;++i) {
+		Enemy* enemy = new Enemy(new Properties("enemy", 500  , 240, 192, 192), 1, 4, 150, -68, -34, -50, -93);
+		m_GameObjects.push_back(enemy);
+	}
+	
+	
+	
+
 	
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
 	return m_isRunning = true;

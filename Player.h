@@ -15,29 +15,15 @@ using namespace std;
  
 class Player : public Character {
 public:
-	Player(Properties* props);
+	Player(Properties* props, float Row, float FrameCount, float AnimationSpeed, float x, float y, float w, float h);
 	
-	virtual void Draw();
-	virtual void Clean();
+
 	virtual void Update(float dt);
 
 
 private:
 	void AnimationState();
  
-	bool m_IsJumping;
-	bool m_IsGrounded;
-	bool m_IsRunning;
-	bool m_IsFalling;
-	bool m_IsAttacking;
-	bool m_IsCrouching;
 
-	float m_JumpTime; // Time the player leave the ground
-	float m_JumpForce; //forcce apply on the player at the jumpoing time
-	float m_AttackTime;
-
-	Collider* m_Collider;	
-	SpriteAnimation* m_Animation;
-	Rigidbody* m_Rigidbody;
-	Vector2D m_LastSafePosition;// to make sure the player doesn't stuck
+	
 };

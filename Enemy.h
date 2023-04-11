@@ -1,25 +1,22 @@
-//#pragma once
-//#include"Character.h"
-//#include"Collider.h"
-//#include"Rigidbody.h"
-//#include"SeqAnimation.h"
-//#include"Vector2D.h"
-//#include"INCLUDE.h"
-//
-//
-//
-//class Enemy : public Character {
-//public:
-//	Enemy(Properties* props);
-//	virtual void Draw();
-//	virtual void Clean();
-//	virtual void Update(float dt);
-//
-//private:
-//	Collider* m_Collider;
-//	Rigidbody* m_Rigidbody;
-//	SeqAnimation* m_Animation;
-//	Vector2D* m_LastSafePosiotion;
-//
-//};
-//
+#pragma once
+#include"Character.h"
+#include"SpriteAnimation.h"
+#include"Rigidbody.h"
+#include"Collider.h"
+#include"Vector2D.h"
+
+using namespace std;
+
+class Enemy : public Character {
+public:
+	Enemy(Properties* props, float Row, float FrameCount, float AnimationSpeed, float x, float y, float w, float h);
+
+	virtual void Update(float dt);
+
+private:
+	void AnimationState();
+
+
+	float m_Vision;
+	
+};

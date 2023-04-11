@@ -12,7 +12,7 @@ public:
 	inline void SetBuffer(int x, int y, int w, int h) { m_Buffer = { x,y,w,h }; }
 
 	void Set(int x, int y, int w, int h) {
-		m_Box = { x, y, w ,h };
+		m_Box = { x - m_Buffer.x, y - m_Buffer.y, w - m_Buffer.w ,h - m_Buffer.h };
 	}
 
 	bool CollideWithMap() {
