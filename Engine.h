@@ -4,6 +4,7 @@
 #include"INCLUDE.h"
 #include"GameObject.h"
 #include"Map.h"
+//#include"Player.h"
 //#include"GameState.h"
 
 using namespace std;
@@ -28,7 +29,7 @@ public:
 	//void PopState();// pause the game but not quit
 	//void PushState(GameState* current);//when you don't want to destroy the current state but still want to add smt in and drove it on the screen
 	//void ChangeState(GameState* target);//changing the state
-	
+	//inline Player* Getplayer() { return m_player; }
 	inline Map* GetMap() { return m_LevelMap; }
 	inline bool isRunning() { return m_isRunning; };
 	inline SDL_Renderer* GetRenderer() { return m_Renderer; };
@@ -42,6 +43,6 @@ private:
 	static Engine* s_Instance;
 	//vector<GameState*> m_State;
 	vector<GameObject*>m_GameObjects;
-	
+	//Player* m_player;
 };
 

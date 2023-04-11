@@ -18,6 +18,9 @@ public:
 	virtual void Draw() ;
 	virtual void Update(float dt) ;
 	virtual void Clean() ;
+	
+	float GetX();
+	float GetY();
 
 protected:
 	bool m_IsJumping;

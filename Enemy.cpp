@@ -3,6 +3,7 @@
 #include"INCLUDE.h"
 #include"Input.h"
 #include"Engine.h"
+
 //#include"Factory.h"
 #include"CollisionHandler.h"
 #include"Camera.h"
@@ -16,15 +17,14 @@ Enemy::Enemy(Properties* props, float Row, float FrameCount, float AnimationSpee
 	m_IsAttacking = false;
 	m_IsDead = false;*/
 
-
-
 }
 
 
 void Enemy::Update(float dt) {
-
+	
 	Character::Update(dt);
 	AnimationState();
+	//moveToPlayer();
 	m_Animation->Update(dt);
 	
 }
@@ -33,5 +33,11 @@ void Enemy::AnimationState() {
 	//idle
 	m_Animation->SetProps("Enemy_idle", 1, 4, 170);
 
+	
+}
+
+void Enemy::moveToPlayer() {
+	//cout << Engine::Getinstance()->Getplayer()->GetX() << endl;
+	
 	
 }

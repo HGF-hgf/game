@@ -66,9 +66,7 @@ void Character::Update(float dt) {
 		m_IsGrounded = false;
 	}
 
-	if (CollisionHandler::GetInstance()->MapCollision(m_Collider->Get()) && CollisionHandler::GetInstance()->checkTileID(m_Collider->Get()) == 240 || m_Collider->Get().y > 650) {
-		m_IsDead = true;
-	}
+	
 
 
 	m_Origin->X = m_Transform->X + m_width / 2;
@@ -81,4 +79,12 @@ void Character::Update(float dt) {
 
 void Character::Clean() {
 	Texture::Getinstance()->Drop(m_TextureID);
+}
+
+float Character::GetX() {
+	return m_Transform->X;
+}
+
+float Character::GetY() {
+	return m_Transform->Y;
 }

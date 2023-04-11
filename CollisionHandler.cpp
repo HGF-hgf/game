@@ -47,8 +47,8 @@ bool CollisionHandler::MapCollision(SDL_Rect a) {
 
 int CollisionHandler::checkTileID(SDL_Rect a) {
 	int tileSize = 32;
-	int RowCount = 1000;
-	int ColCount = 1920;
+	int RowCount = 30;
+	int ColCount = 100;
 
 	int left_tile = a.x / tileSize;
 	int right_tile = (a.x + a.w) / tileSize;

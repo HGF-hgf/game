@@ -3,7 +3,6 @@
 #include"INCLUDE.h"
 #include"Input.h"
 #include"Engine.h"
-//#include"Factory.h"
 #include"CollisionHandler.h"
 #include"Camera.h"
 
@@ -50,7 +49,7 @@ void Player::Update(float dt) {
 		m_Rigidbody->ApplyForceY(UPWARD * m_JumpForce);	
 	}
 
-	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_W) && m_IsJumping && m_JumpTime > 0) {
+	if ((Input::GetInstance()->GetKeyDown(SDL_SCANCODE_W) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE)) && m_IsJumping && m_JumpTime > 0) {
 		m_JumpTime -= dt;
 		m_Rigidbody->ApplyForceY(UPWARD * m_JumpForce);
 	}
@@ -77,6 +76,13 @@ void Player::Update(float dt) {
 		m_AttackTime = ATTACK_TIME;
 	}
 
+	if (CollisionHandler::GetInstance()->MapCollision(m_Collider->Get()) && CollisionHandler::GetInstance()->checkTileID(m_Collider->Get()) == 240 || m_Collider->Get().y > 650) {
+		m_IsDead = true;
+	}
+
+
+	//cout << m_Transform->X<<endl;
+
 	Character::Update(dt);
 	
 	AnimationState();
@@ -99,8 +105,8 @@ void Player::AnimationState() {
 	if (m_IsFalling)
 		m_Animation->SetProps("player_fall", 1, 3, 450);
 //dead
-	if (m_IsDead)
-		cout << "Game Over" << endl;
+	/*if (m_IsDead)
+		cout << "Game Over" << endl;*/
 
 }
 
