@@ -16,6 +16,7 @@ public:
 
 	virtual void Update(float dt);
 	virtual void moveToPlayer();
+	//virtual bool autoMove();
 	
 private:
 	void AnimationState();

@@ -11,6 +11,7 @@ using namespace std;
 struct Properties
 {
 public:
+	// ham chua thuoc tinh cua character
 	Properties(string textureID, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE) {
 		X = x;
 		Y = y;
@@ -29,7 +30,7 @@ public:
 class GameObject : public Object
 {
 public:
-	GameObject(Properties* props) 
+	GameObject(Properties* props)  
 	:m_TextureID(props->TextureID), m_width(props->Width), m_height(props->Height), m_Flip(props->Flip) {
 		m_Transform = new Transform(props->X, props->Y);
 		
@@ -39,7 +40,7 @@ public:
 	}
 
 
-	inline Point* GetOrigin() { return m_Origin; }
+	inline Point* GetOrigin() { return m_Origin; } // tra ve toa do tam cua character
 
 	//virtual ~GameObject() {}
 	virtual void Draw() = 0;

@@ -46,15 +46,6 @@ bool Engine::Init() {
 
 	Texture::Getinstance()->ParseTexture("textures.tml");
 
-	/*Texture::Getinstance()->LoadTexture("player_idle", "texture/idle.png");
-	Texture::Getinstance()->LoadTexture("player_run", "texture/run.png");*/
-	/*Texture::Getinstance()->LoadTexture("player_jump", "texture/jump.png");
-	Texture::Getinstance()->LoadTexture("player_fall", "texture/fall.png");
-	
-	*/
-	//Texture::Getinstance()->LoadTexture("bg", "texture/bg2.jpg");
-	/*Properties* props = new Properties("player_idle", 100, 100, 128, 128);
-	GameObject* player = Factory::Getinstance()->CreateObject("player", props);*/
 	player = new Player(new Properties("player", 100 , 300, 128, 128), 1, 6, 150, -48, -44, -30, -52);
 	m_GameObjects.push_back(player);
 	
@@ -80,7 +71,6 @@ void Engine::Render() {
 		m_GameObjects[i]->Draw();
 	}
 
-	
 	SDL_RenderPresent(m_Renderer);
 }
 

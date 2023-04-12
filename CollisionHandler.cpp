@@ -11,16 +11,47 @@ CollisionHandler::CollisionHandler() {
 	m_CollisionTilemap = m_CollisionLayer->GetTilemap();
 }
 
+// ham su dung de check xem hai hcn co dang chong len nhau k
 bool CollisionHandler::checkCollision(SDL_Rect a, SDL_Rect b) {
 	bool x_overLaps = (a.x < b.x + b.w) && (a.x + a.w > b.x);
 	bool y_overLaps = (a.y < b.y + b.h) && (a.y + a.h > b.y);
 	return (x_overLaps && y_overLaps);
 }
 
+int CollisionHandler::checkTileID(SDL_Rect a) {
+	int tileSize = 32;
+	int RowCount = 100;
+	int ColCount = 800;
+
+	int left_tile = a.x / tileSize;	//lay thu tu o ben trai
+	int right_tile = (a.x + a.w) / tileSize; // lay thu tu o ben phai
+
+	int top_tile = a.y / tileSize; // lay thu tu o tren
+	int bottom_tile = (a.y + a.h) / tileSize; // lay thu tu o duoi chan
+
+	// neu cac gia tri ra khoi gioi han thi gan chung bang gia tri hop le gan nhat
+	if (left_tile < 0) left_tile = 0;
+	if (right_tile > ColCount) right_tile = ColCount;
+
+	if (top_tile < 0) top_tile = 0;
+	if (bottom_tile > RowCount) bottom_tile = RowCount;
+
+	// ktra cac o giao nhau neu lon hon 0 thi tra ve gia tri o duoi
+	for (int i = left_tile; i <= right_tile; ++i) {
+		for (int j = top_tile; j <= bottom_tile; ++j) {
+			if (m_CollisionTilemap[j][i] > 0) {
+				return m_CollisionTilemap[j][i];
+			}
+		}
+	}
+	return 0;
+}
+
+// tuong tu ham tren nhung tra ve dung neu m_CollisionTilemap[j][i] > 0
 bool CollisionHandler::MapCollision(SDL_Rect a) {
 	int tileSize = 32;
-	int RowCount = 1000;
-	int ColCount = 1920;
+	int RowCount = 100;
+	int ColCount = 800;
 
 	int left_tile = a.x / tileSize;
 	int right_tile = (a.x + a.w) / tileSize;
@@ -45,29 +76,3 @@ bool CollisionHandler::MapCollision(SDL_Rect a) {
 	return false;
 }
 
-int CollisionHandler::checkTileID(SDL_Rect a) {
-	int tileSize = 32;
-	int RowCount = 30;
-	int ColCount = 100;
-
-	int left_tile = a.x / tileSize;
-	int right_tile = (a.x + a.w) / tileSize;
-
-	int top_tile = a.y / tileSize;
-	int bottom_tile = (a.y + a.h) / tileSize;
-
-	if (left_tile < 0) left_tile = 0;
-	if (right_tile > ColCount) right_tile = ColCount;
-
-	if (top_tile < 0) top_tile = 0;
-	if (bottom_tile > RowCount) bottom_tile = RowCount;
-
-	for (int i = left_tile; i <= right_tile; ++i) {
-		for (int j = top_tile; j <= bottom_tile; ++j) {
-			if (m_CollisionTilemap[j][i] > 0) {
-				return m_CollisionTilemap[j][i];
-			}
-		}
-	}
-	
-}

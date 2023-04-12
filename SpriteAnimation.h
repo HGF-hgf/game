@@ -13,9 +13,9 @@ public:
 	void SetProps(string textureID, int spriteRow, int FrameCount, int animationSpeed);
 
 private:
-	int m_AnimationSpeed;
-	int m_spriteRow;
-	int m_FrameCount;
-	string m_textureID;
+	int m_AnimationSpeed;//toc do hien thi cua cac animation
+	int m_spriteRow;//so hang
+	int m_FrameCount;//dem so frame can ve
+	string m_textureID;//ten cua doi tuong can ve
 };
 

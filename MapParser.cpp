@@ -4,6 +4,7 @@ using namespace std;
 
 MapParser* MapParser::s_Instance = nullptr;
 
+//ktra map co dc load ko
 bool MapParser::Load() {
 	if(!Parse("Level1", "texture/map/map1.tmx"))
 		return false;
@@ -11,32 +12,36 @@ bool MapParser::Load() {
 }
 
 
-
+// ham nhan vao id va duong dan tep
 bool MapParser::Parse(string id, string source) {
-	TiXmlDocument xml;
+	TiXmlDocument xml; 
 	xml.LoadFile(source);
+	//ktra xem tep dang xet co duoc tai ko 
 	if (xml.Error()) {
 		cerr << "Failed to load" << source << endl;
 		return false;
 	}
 
+
 	TiXmlElement* root = xml.RootElement();
 	int rowcount, colcount, tilesize = 0;
-	root->Attribute("width", &colcount);
-	root->Attribute("height", &rowcount);
-	root->Attribute("tilewidth", &tilesize);
+	root->Attribute("width", &colcount); // so cot cua map
+	root->Attribute("height", &rowcount); // so hang cua map 
+	root->Attribute("tilewidth", &tilesize); // size cua mot o trong map
 
 
-	//Parse tileset
+	
 	TilesetList tilesets;
+	// loop nay dung de ktra tat ca cac phan tu cua tileset va luu vao tilesets
 	for (TiXmlElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
 		if (e->Value() == string("tileset")) {
 			tilesets.push_back(ParseTileset(e));
 		}
 	}
 
-	//Parse Layer
+	
 	Map* gamemap = new Map();
+	// xet voi moi layer su dung ham parsetilelayer de phan tich layer tren map va luu vao maplayer
 	for (TiXmlElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()){
 		if (e->Value() == string("layer")) {
 			Tile* tilelayer = ParseTileLayer(e, tilesets, tilesize, rowcount, colcount);
@@ -44,12 +49,13 @@ bool MapParser::Parse(string id, string source) {
 		}
 	}
 
-	m_MapDict[id] = gamemap;
+	m_MapDict[id] = gamemap; // luu gamemap vao dua tren id cua map
 	return true;
 }
 
 Tileset MapParser::ParseTileset(TiXmlElement* xmlTileset) {
 	Tileset tileset;
+	//lay cac thong tin tu file tmx
 	tileset.Name = xmlTileset->Attribute("name");
 	xmlTileset->Attribute("firstgid", &tileset.FirstID);
 	xmlTileset->Attribute("tilecount", &tileset.TileCount);
@@ -67,6 +73,7 @@ Tileset MapParser::ParseTileset(TiXmlElement* xmlTileset) {
 
 Tile* MapParser::ParseTileLayer(TiXmlElement* xmlLayer, TilesetList tilesets, int tilesize, int rowcount, int colcount) {
 	TiXmlElement* data = nullptr;
+	// duyet de tim "data"
 	for (TiXmlElement* e = xmlLayer->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
 		if (e->Value() == string("data")) {
 			data = e;
@@ -74,19 +81,19 @@ Tile* MapParser::ParseTileLayer(TiXmlElement* xmlLayer, TilesetList tilesets, in
 		}
 	}
 
-	string matrix(data->GetText());
-	istringstream iss(matrix);
+	string matrix(data->GetText()); // lay cac phan tu thuoc data duoi dang string
+	istringstream iss(matrix); // chuyen chuoi nay thanh cac so nguyen 
 	string id;
 
 	TileMap tilemap(rowcount, vector<int>(colcount, 0));
 
 	for (int row = 0; row < rowcount; row++) {
 		for (int col = 0; col < colcount; col++) {
-			getline(iss, id, ',');
+			getline(iss, id, ','); // lay gia tri cac tile r luu vao id
 			stringstream convertor(id);
-			convertor >> tilemap[row][col];
+			convertor >> tilemap[row][col];// luu vao o tuong ung 
 
-			if (!iss.good())
+			if (!iss.good()) // ket thuc vong lap khi khong con gia tri de doc
 				break;
 		}
 	}

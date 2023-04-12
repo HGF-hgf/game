@@ -29,6 +29,7 @@ void Enemy::Update(float dt) {
 
 	//cout << m_Vision << endl;
 	moveToPlayer();
+	//autoMove();
 	Character::Update(dt);
 	
 	AnimationState();
@@ -44,7 +45,7 @@ void Enemy::AnimationState() {
 		m_Animation->SetProps("Enemy_run", 1, 4, 150);
 	//attack
 	if (m_IsAttacking)
-		m_Animation->SetProps("Enemy_attack", 1, 4, 100);
+		m_Animation->SetProps("Enemy_attack", 1, 4, 150);
 }
 
 void Enemy::moveToPlayer() {
@@ -68,11 +69,10 @@ void Enemy::moveToPlayer() {
 
 	if (m_Vision >= -40 && m_Vision < 0) {
 		m_IsAttacking = true;
-		m_Rigidbody->UnsetForce();
 	}
 
 	if (m_Vision <= 100 && m_Vision > 0) {
 		m_IsAttacking = true;
-		m_Rigidbody->UnsetForce();
 	}
 }
+

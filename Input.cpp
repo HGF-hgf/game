@@ -6,6 +6,7 @@
 using namespace std;
 
 Input* Input::s_Instance = nullptr;
+//cap nhat trang thai cac phim tren ban phim
 
 Input::Input() {
 	m_KeyStates = SDL_GetKeyboardState(nullptr);
@@ -37,7 +38,7 @@ void Input::KeyUp() {
 void Input::KeyDown() {
 	m_KeyStates = SDL_GetKeyboardState(nullptr);
 }
-
+//
 int Input::GetAxisKey(Axis axis) {
 	switch (axis) {
 	case HORIZONTAL:
