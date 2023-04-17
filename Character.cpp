@@ -5,14 +5,13 @@
 #include"INCLUDE.h"
 #include"Input.h"
 #include"Engine.h"
-//#include"Factory.h"
+
 #include"CollisionHandler.h"
 #include"Camera.h"
 
-//static Registrar<Character> registrar("Character");
-
 Character::Character(Properties* props, float Row, float FrameCount, float AnimationSpeed, float x, float y, float w, float h) : GameObject(props) {
 
+	m_Name = props->TextureID;
 	m_IsRunning = false;
 	m_IsJumping = false;
 	m_IsFalling = false;
@@ -20,11 +19,7 @@ Character::Character(Properties* props, float Row, float FrameCount, float Anima
 	m_IsAttacking = false;
 	m_IsDead = false;
 
-
 	m_Flip = SDL_FLIP_NONE;
-
-	
-	
 
 	m_Collider = new Collider();
 	m_Collider->SetBuffer(x, y, w, h);
@@ -34,6 +29,7 @@ Character::Character(Properties* props, float Row, float FrameCount, float Anima
 
 	m_Animation = new SpriteAnimation();
 	m_Animation->SetProps(m_TextureID, Row, FrameCount, AnimationSpeed);
+
 }
 
 void Character::Draw() {
@@ -66,12 +62,8 @@ void Character::Update(float dt) {
 		m_IsGrounded = false;
 	}
 
-	
-
-
 	m_Origin->X = m_Transform->X + m_width / 2;
 	m_Origin->Y = m_Transform->Y + m_height / 2;
-
 	
 	//m_Animation->Update(dt);
 }
@@ -81,10 +73,34 @@ void Character::Clean() {
 	Texture::Getinstance()->Drop(m_TextureID);
 }
 
+void Character::OnCollide(Character* target)
+{
+}
+
+void Character::kill()
+{
+	m_IsDead = true;
+}
+
+bool Character::IsDead() const
+{
+	return m_IsDead;
+}
+
+std::string Character::GetName() const
+{
+	return m_Name;
+}
+
 float Character::GetX() {
 	return m_Transform->X;
 }
 
 float Character::GetY() {
 	return m_Transform->Y;
+}
+
+SDL_Rect Character::GetBox()
+{
+	return m_Collider->Get();
 }

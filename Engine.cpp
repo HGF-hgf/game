@@ -8,6 +8,7 @@
 #include"MapParser.h"
 #include"Camera.h"
 #include"Enemy.h"
+#include"Bullet.h"
 
 using namespace std;
 
@@ -46,14 +47,14 @@ bool Engine::Init() {
 
 	Texture::Getinstance()->ParseTexture("textures.tml");
 
-	player = new Player(new Properties("player", 100 , 300, 128, 128), 1, 6, 150, -48, -44, -30, -52);
-	m_GameObjects.push_back(player);
+	player = new Player(new Properties("player", 100, 300, 128, 128), 1, 6, 150, -48, -44, -30, -52);
+	addCharacter(player);
 	
-	for (int i = 0; i < 1;++i) {
-		Enemy* enemy = new Enemy(new Properties("enemy", 800 /* i * (rand() % (5 + 2 - 1) + 2)*/, 240, 192, 192), 1, 4, 150, -68, -34, -50, -93);
-		m_GameObjects.push_back(enemy);
+	for (int i = 0; i < 6;++i) {
+		Enemy* enemy = new Enemy(new Properties("enemy", /*rand() % (1280 - 640 + 1) +*/ 300 + i*350, 640-93-35 /*+ rand() % (573 - 320 + 1) + 320*/, 192, 192), 1, 4, 150, -68, -34, -50, -93);
+		addCharacter(enemy);
 	}
-	
+
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
 	return m_isRunning = true;
 }
@@ -67,27 +68,70 @@ void Engine::Render() {
 
 	m_LevelMap->Render();
 
-	for (unsigned int i = 0;i != m_GameObjects.size();i++) {
-		m_GameObjects[i]->Draw();
+	for (auto& it : m_GameObjects) {
+		int id = it.first;
+		GameObject* object = it.second;
+		object->Draw();
 	}
 
 	SDL_RenderPresent(m_Renderer);
 }
 
 void Engine::Update() {
-	float dt = Timer::Getinstance()->GetDeltaTime();
-	for (unsigned int i = 0;i != m_GameObjects.size();i++) {
-		m_GameObjects[i]->Update(dt);
+
+	for (auto& it1 : m_GameObjects) {
+		Character* ch1 = (Character*) it1.second;
+
+		for (auto& it2 : m_GameObjects) {
+			Character* ch2 = (Character*) it2.second;
+			
+			if (ch1 != ch2 && CollisionHandler::GetInstance()->checkCollision(ch1->GetBox(), ch2->GetBox()))
+			{
+				ch1->OnCollide(ch2);
+			}
+		}
 	}
+
+	float dt = Timer::Getinstance()->GetDeltaTime();
+	for (auto& it: m_GameObjects) {
+		int id = it.first;
+		GameObject* object = it.second;
+		object->Update(dt);
+	}
+
 	m_LevelMap->Update();
 	Camera::GetInstance()->Update(dt);
 
+	std::vector<int> m_removedIds;
+
+	for (auto& it : m_GameObjects) {
+		int id = it.first;
+		GameObject* object = it.second;
+		Character* character = (Character*)object;
+		
+		if (character->IsDead())
+			m_removedIds.push_back(character->GetId());
+	}
+
+	for (auto& id : m_removedIds)
+		removeCharacter(m_GameObjects[id]);
 }
 
 
 
 void Engine::Events() {
 	Input::GetInstance()->HandIn();
+}
+
+void Engine::addCharacter(GameObject* object)
+{
+	m_GameObjects[object->GetId()] = object;
+}
+
+void Engine::removeCharacter(GameObject* object)
+{
+	m_GameObjects.erase(object->GetId());
+	delete object;
 }
 
 void Engine::Clean() {
@@ -106,3 +150,7 @@ void Engine::Clean() {
 void Engine::Quit() {
 	m_isRunning = false;
 }
+
+//float Engine::SetBotPos() {
+//
+//}

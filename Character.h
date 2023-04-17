@@ -17,10 +17,19 @@ public:
 
 	virtual void Draw() ;
 	virtual void Update(float dt) ;
-	virtual void Clean() ;
-	
+	virtual void Clean();
+	virtual void OnCollide(Character* target);
+
+	void kill();
+
+	bool IsDead() const;
+
+	std::string GetName() const;
+
 	float GetX();
 	float GetY();
+
+	SDL_Rect GetBox();
 
 protected:
 	bool m_IsJumping;
@@ -35,7 +44,7 @@ protected:
 	float m_JumpForce; //forcce apply on the Enemy at the jumpoing time
 	float m_AttackTime;
 	string m_Name;
-
+	
 	
 
 	Collider* m_Collider;

@@ -4,7 +4,7 @@
 #include"Rigidbody.h"
 #include"Collider.h"
 #include"Vector2D.h"
-#include"Player.h"
+
 
 using namespace std;
 
@@ -15,11 +15,15 @@ public:
 	Enemy(Properties* props, float Row, float FrameCount, float AnimationSpeed, float x, float y, float w, float h);
 
 	virtual void Update(float dt);
-	virtual void moveToPlayer();
-	//virtual bool autoMove();
+	virtual void OnCollide(Character* source);
+	void moveToPlayer();
+	void autoMove();
+	//void KnockBack();
 	
 private:
 	void AnimationState();
 	float m_Vision;
-	//Player& m_player;
+	float m_high;
+	int HP = 3;
+	bool m_beingHit;
 };

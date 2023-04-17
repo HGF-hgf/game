@@ -37,8 +37,15 @@ public:
 		float px = (props->X + props->Width) / 2;
 		float py = (props->Y + props->Height) / 2;
 		m_Origin = new Point(px, py);
-	}
 
+
+		m_Id = s_N;
+		s_N++;
+	}
+	int GetId() const
+	{
+		return m_Id;
+	}
 
 	inline Point* GetOrigin() { return m_Origin; } // tra ve toa do tam cua character
 
@@ -53,4 +60,6 @@ protected:
 	int m_width, m_height;
 	string m_TextureID;
 	SDL_RendererFlip m_Flip;
+	int m_Id;
+	static int s_N;
 };

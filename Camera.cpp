@@ -16,7 +16,7 @@ void Camera::Update(float dt) {
 
 		if (m_ViewBox.x < 0) {
 			m_ViewBox.x = 0;
-		}							//ktra neu phan hop cam chay theo nguoi choi bi ra ngoai bien thi se gan chung bang 0 de cam ko bi vuot qua bien							
+		}							//ktra neu phan hop cam chay theo nguoi choi bien ra ngoai bien thi se gan chung bang 0 de cam ko bi vuot qua bien							
 		if (m_ViewBox.y < 0) {
 			m_ViewBox.y = 0;
 		}

@@ -4,6 +4,8 @@
 	<texture id="player_idle" source="texture/idle.png"/>
 	<texture id="player_jump" source="texture/jump-Sheet3.png"/>
 	<texture id="player_fall" source="texture/fall-Sheet.png"/>
+	<texture id="player_death" source="texture/death-Sheet.png"/>
+	<texture id="player_attack" source="texture/attack-Sheet.png"/>
 	
 	<texture id="Enemy_idle" source="texture/enemy_idle.png"/>
 	<texture id="Enemy_run" source="texture/enemy_run.png"/>
@@ -12,6 +14,7 @@
 	<texture id="Enemy_fall" source="texture/enemy_fall.png"/>
 
 	<texture id="explosion" source="texture/Explosion.png"/>
+	<texture id="bullet" source="texture/projectile-Sheet.png"/>
 	<texture id="bg" source="texture/bg2.jpg"/>
 
 </textures>

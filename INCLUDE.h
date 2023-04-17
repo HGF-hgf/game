@@ -3,7 +3,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
-#include<map>
+#include<unordered_map>
 #include<SDL_image.h>
 #include<SDL.h>
 //#include<SDL_ttf.h>
